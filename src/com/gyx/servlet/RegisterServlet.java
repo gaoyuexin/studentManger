@@ -21,6 +21,7 @@ public class RegisterServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         String func = req.getParameter("func");
         //注册和登录用分支语句
+        //添加了一行注释
         switch (func) {
             case "registerUser":
                 registerUser(req, resp);
