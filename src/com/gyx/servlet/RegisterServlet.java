@@ -22,6 +22,7 @@ public class RegisterServlet extends HttpServlet {
         String func = req.getParameter("func");
         //注册和登录用分支语句
         //添加了一行注释
+        //hotfix
         switch (func) {
             case "registerUser":
                 registerUser(req, resp);
