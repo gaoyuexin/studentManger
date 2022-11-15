@@ -23,6 +23,7 @@ public class RegisterServlet extends HttpServlet {
         //注册和登录用分支语句
         //添加了一行注释
         //hotfix
+         //git修改的注释
         switch (func) {
             case "registerUser":
                 registerUser(req, resp);
