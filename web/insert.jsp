@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<%@include file="loginControl.jsp"%>
+<%--<%@include file="loginControl.jsp"%>--%>
 <h1>学生注册中心</h1>
 <span style="color: red">
     ${errorMsg}

@@ -2,6 +2,7 @@ package com.gyx.servlet;
 
 import com.gyx.entity.Student;
 import com.gyx.service.StudentService;
+import com.gyx.utils.PageTools;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +21,8 @@ public class StudentServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("utf-8");
-        req.setCharacterEncoding("utf-8");
+//        resp.setCharacterEncoding("utf-8");
+//        req.setCharacterEncoding("utf-8");
         String func = req.getParameter("func");
         switch (func) {
             case "insertStudent":
@@ -34,6 +35,17 @@ public class StudentServlet extends HttpServlet {
                 findStudentById(req, resp);
             case "updateStudent":
                 updateStudent(req, resp);
+            case "batchDelete":
+                batchDelete(req,resp);
+        }
+    }
+
+    private void batchDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        //获取到所有的id
+        String ids = req.getParameter("ids");
+        boolean isSuccess = studentService.batchDelete(ids);
+        if (isSuccess){
+            resp.sendRedirect("student?func=findAllStudent");
         }
     }
 
@@ -70,7 +82,14 @@ public class StudentServlet extends HttpServlet {
     }
 
     private void findAllStudent(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        List<Student> stus = studentService.finAllStudent();
+        int totalCount = studentService.selectStudentCount();
+        String currentPage = req.getParameter("currentPage");
+        PageTools pageTools = new PageTools(totalCount,currentPage,3);
+        List<Student> stus = studentService.finAllStudent(pageTools);
+        req.setAttribute("stus",stus);
+        req.setAttribute("pageTool",pageTools);
+        req.getRequestDispatcher("show.jsp").forward(req,resp);
+
 //        resp.setHeader("Content-Type", "text/html;charset=utf-8");
 //        PrintWriter writer = resp.getWriter();
 //        writer.write("<table border=\"1\" cellspacing = \"0\" cellpadding = \"10\" width = \"1000\" align=\"center\">\n" +

@@ -17,8 +17,8 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("utf-8");
-        req.setCharacterEncoding("utf-8");
+//        resp.setCharacterEncoding("utf-8");
+//        req.setCharacterEncoding("utf-8");
         String func = req.getParameter("func");
         //注册和登录用分支语句
         //添加了一行注释

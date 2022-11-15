@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<%@include file="loginControl.jsp"%>
+<%--<%@include file="loginControl.jsp"%>--%>
 <a href="student?func=findAllStudent">展示所有学生</a>
 <a href="insert.jsp">添加学生</a>
 </body>
