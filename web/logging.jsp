@@ -15,7 +15,7 @@
 <span style="color: red">
     ${errorMsg}
 </span>
-<form action="user?func=userLogin" method="post">
+<form action="user?func=loggingUser" method="post">
     用户名：<input type="text" name="username" placeholder="请输入用户名">
     密码：<input type="password" name="password" placeholder="请输入密码">
     <input type="submit" value="登录">

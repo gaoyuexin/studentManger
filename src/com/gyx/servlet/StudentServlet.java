@@ -16,29 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @WebServlet("/student")
-public class StudentServlet extends HttpServlet {
+public class StudentServlet extends BaseServlet {
     private StudentService studentService = new StudentService();
-
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setCharacterEncoding("utf-8");
-//        req.setCharacterEncoding("utf-8");
-        String func = req.getParameter("func");
-        switch (func) {
-            case "insertStudent":
-                insertStudent(req, resp);
-            case "findAllStudent":
-                findAllStudent(req, resp);
-            case "deleteStudentById":
-                deleteStudentById(req, resp);
-            case "findStudentById":
-                findStudentById(req, resp);
-            case "updateStudent":
-                updateStudent(req, resp);
-            case "batchDelete":
-                batchDelete(req,resp);
-        }
-    }
 
     private void batchDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //获取到所有的id
@@ -89,7 +68,6 @@ public class StudentServlet extends HttpServlet {
         req.setAttribute("stus",stus);
         req.setAttribute("pageTool",pageTools);
         req.getRequestDispatcher("show.jsp").forward(req,resp);
-
 //        resp.setHeader("Content-Type", "text/html;charset=utf-8");
 //        PrintWriter writer = resp.getWriter();
 //        writer.write("<table border=\"1\" cellspacing = \"0\" cellpadding = \"10\" width = \"1000\" align=\"center\">\n" +
@@ -115,9 +93,9 @@ public class StudentServlet extends HttpServlet {
 //        }
 //        writer.write("</table>");
         //1.将数据存储到request中
-        req.setAttribute("stus", stus);
-        //2.重定向到新的页面,因为要携带数据，所以用请求转发
-        req.getRequestDispatcher("show.jsp").forward(req, resp);
+//        req.setAttribute("stus", stus);
+//        //2.重定向到新的页面,因为要携带数据，所以用请求转发
+//        req.getRequestDispatcher("show.jsp").forward(req, resp);
 
     }
 

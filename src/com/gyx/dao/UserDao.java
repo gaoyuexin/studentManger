@@ -12,4 +12,8 @@ public class UserDao extends BaseDao<User>{
         return oneLine("select * from user where username = ? and password = ?",
                 User.class,user.getUsername(),user.getPassword());
     }
+
+    public User checkUsername(String username) {
+        return oneLine("select * from user where username = ?",User.class,username);
+    }
 }

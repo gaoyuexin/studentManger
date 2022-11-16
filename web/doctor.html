@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    科室：
+        <select id="department">
+            <option value="0">--请选择---</option>
+            <option value="1">--儿科---</option>
+            <option value="2">--外科---</option>
+            <option value="3">--肛肠科---</option>
+            <option value="4">--妇科---</option>
+        </select>
+    &nbsp;&nbsp;&nbsp;
+    医生：
+        <select id="doctor">
+            <option value="">---请选择---</option>
+        </select>
+</body>
+<script src="js/jquery-3.6.1.js"></script>
+<script>
+    $("#department").change(function () {
+        let department = $(this).val();
+        if (department > 0){
+            $.ajax({
+                url: "doctor",
+                type: "post",
+                data: {"department":department,"func":"findDoctorByDepartment"},
+                dataType: "json",
+                success: function (doctors) {
+                    /*
+                    遍历doctors数组，得到每一个医生
+                    每一个医生创建一个option标签
+                     */
+                    //在遍历之前把原有标签删除
+                    $("#doctor option:gt(0)").remove();
+                    for (var i in doctors){
+                        //创建option标签
+                        var dOption = $("<option>"+doctors[i].dname +"</option>");
+                        $("#doctor").append(dOption);
+                    }
+                }
+            })
+        }
+    })
+</script>
+</html>

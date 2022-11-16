@@ -16,10 +16,15 @@ public class UserService {
 
     public boolean loggingUser(User user, HttpSession session) {
         User newUser = userDao.loggingUser(user);
-        if (newUser!=null){
-            session.setAttribute("user",newUser);
+        if (newUser != null) {
+            session.setAttribute("user", newUser);
             return true;
         }
         return false;
+    }
+
+    public boolean checkUsername(String username) {
+        User user = userDao.checkUsername(username);
+        return user != null;
     }
 }

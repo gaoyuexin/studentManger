@@ -10,30 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/user")
-public class RegisterServlet extends HttpServlet {
+public class RegisterServlet extends BaseServlet {
     private UserService userService = new UserService();
 
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setCharacterEncoding("utf-8");
-//        req.setCharacterEncoding("utf-8");
-        String func = req.getParameter("func");
-        //注册和登录用分支语句
-        //添加了一行注释
-        //hotfix
-         //git修改的注释
-        switch (func) {
-            case "registerUser":
-                registerUser(req, resp);
-                break;
-            case "userLogin":
-                loggingUser(req, resp);
-                break;
-            default:
-                break;
-        }
+    private void checkUsername(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String username = req.getParameter("username");
+        boolean isRegist = userService.checkUsername(username);
+        PrintWriter writer = resp.getWriter();
+        writer.print(isRegist);
     }
 
     private void loggingUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
